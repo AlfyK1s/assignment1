@@ -101,13 +101,9 @@ export AIRFLOW__CORE__LOAD_EXAMPLES=False
 airflow standalone
 ```
 
-1. Откройте панель управления Airflow: [http://localhost:8080](http://localhost:8080).  
-2. Авторизуйтесь с учетными данными `admin` / `admin`.  
-3. Найдите в списке DAG `wine_quality_pipeline` и переведите переключатель в положение **ON**.  
-
-Каждые 5 минут Airflow будет автоматически выполнять:
-- `dvc repro`: воспроизведение подготовки данных и переобучение модели с сохранением метрик в MLflow.
-- `docker compose up -d --build`: сборку и перезапуск Docker-контейнеров инференса и интерфейса.
+Откройте панель управления Airflow: http://localhost:8080.  Авторизуйтесь под пользователем admin.
+Пароль берется из консоли при первом запуске или из файла:Bashcat services/airflow/standalone_admin_password.txt
+Найдите в списке DAG wine_quality_pipeline и переведите переключатель в положение ON.  Каждые 5 минут Airflow будет автоматически выполнять: dvc repro: воспроизведение подготовки данных и переобучение модели с сохранением метрик в MLflow.  docker compose up -d --build: сборку и перезапуск Docker-контейнеров инференса и интерфейса.
 
 ---
 
