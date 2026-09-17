@@ -1,0 +1,20 @@
+# Data manipulation and modeling
+pandas
+numpy
+scikit-learn
+joblib
+
+# Experiment Tracking
+mlflow
+
+# API Serving
+fastapi
+uvicorn[standard]
+pydantic
+
+# Dashboard UI
+streamlit
+requests
+
+# Workflow Orchestration
+apache-airflow

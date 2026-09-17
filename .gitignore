@@ -1,0 +1,11 @@
+.venv/
+venv/
+env/
+
+# Кэш Python и байткод
+__pycache__/
+*.py[cod]
+
+# Системные файлы и конфиги редактора
+.DS_Store
+.vscode/
