@@ -76,14 +76,7 @@ git add data/raw/winequality-red.csv.dvc data/raw/.gitignore
 export AIRFLOW_HOME="$(pwd)/services/airflow"
 export PROJECT_DIR="$(pwd)"
 
-airflow db init
-airflow users create \
-    --username admin \
-    --password admin \
-    --firstname Admin \
-    --lastname User \
-    --role Admin \
-    --email admin@example.com
+airflow standalone
 ```
 
 ---
