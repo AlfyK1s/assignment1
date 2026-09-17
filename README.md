@@ -75,7 +75,9 @@ git add data/raw/winequality-red.csv.dvc data/raw/.gitignore
 ```bash
 export AIRFLOW_HOME="$(pwd)/services/airflow"
 export PROJECT_DIR="$(pwd)"
+export AIRFLOW__CORE__LOAD_EXAMPLES=False
 
+source .venv/bin/activate
 airflow standalone
 ```
 
