@@ -85,16 +85,20 @@ airflow standalone
 
 ## 2. Запуск автоматического пайплайна
 
-Для запуска работы всей системы достаточно поднять фоновые сервисы Airflow:
+Для запуска всей системы (планировщик, API-сервер и UI) достаточно поднять Airflow в standalone-режиме:
 
 ```bash
+# Переход в репозиторий и активация окружения
+cd assignment1
+source ../venv/bin/activate
+
+# Переменные окружения
 export AIRFLOW_HOME="$(pwd)/services/airflow"
 export PROJECT_DIR="$(pwd)"
-source .venv/bin/activate
+export AIRFLOW__CORE__LOAD_EXAMPLES=False
 
-# Запуск планировщика и веб-сервера в фоновом режиме
-airflow scheduler &
-airflow webserver --port 8080 &
+# Единый запуск всех сервисов Airflow
+airflow standalone
 ```
 
 1. Откройте панель управления Airflow: [http://localhost:8080](http://localhost:8080).  
