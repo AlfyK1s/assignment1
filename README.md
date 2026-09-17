@@ -57,8 +57,8 @@
 ```bash
 git clone https://github.com/AlfyK1s/assignment1
 
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
@@ -77,7 +77,7 @@ export AIRFLOW_HOME="$(pwd)/services/airflow"
 export PROJECT_DIR="$(pwd)"
 export AIRFLOW__CORE__LOAD_EXAMPLES=False
 
-source .venv/bin/activate
+source venv/bin/activate
 airflow standalone
 ```
 
