@@ -57,13 +57,14 @@
 ```bash
 git clone https://github.com/AlfyK1s/assignment1
 
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
+python3 -m venv .venv
+source .venv/bin/activate
+cd assignment1
 pip install -r requirements.txt
 ```
 
 ### Инициализация DVC и фиксация сырых данных:
+Датасет: https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009
 ```bash
 # Убедитесь, что winequality-red.csv находится в data/raw/
 dvc init
