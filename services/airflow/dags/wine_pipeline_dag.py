@@ -3,38 +3,35 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
-PROJECT_DIR = os.getenv("PROJECT_DIR", "/opt/airflow/project")
+# Получаем абсолютный путь к корню репозитория
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+PROJECT_DIR = os.getenv("PROJECT_DIR", BASE_DIR)
 
 default_args = {
     "owner": "airflow",
-    "depends_on_past": False,
-    "start_date": datetime(2026, 1, 1),
-    "email_on_failure": False,
     "retries": 1,
     "retry_delay": timedelta(minutes=1),
 }
 
 with DAG(
-    "wine_quality_pipeline",
+    dag_id="wine_quality_pipeline",
     default_args=default_args,
-    description="End-to-end wine classification pipeline every 5 mins",
-    schedule_interval="*/5 * * * *",
+    start_date=datetime(2026, 1, 1),
+    schedule="*/5 * * * *",
     catchup=False,
+    is_paused_upon_creation=False,
 ) as dag:
 
-    stage_1_data = BashOperator(
-        task_id="data_engineering",
-        bash_command=f"cd {PROJECT_DIR} && python code/datasets/process_data.py",
+    # Активируем venv и запускаем DVC
+    run_dvc_pipeline = BashOperator(
+        task_id="dvc_pipeline",
+        bash_command=f'cd "{PROJECT_DIR}" && source .venv/bin/activate && dvc repro',
     )
 
-    stage_2_model = BashOperator(
-        task_id="model_engineering",
-        bash_command=f"cd {PROJECT_DIR} && python code/models/train.py",
+    # Деплой контейнеров Docker
+    deploy_services = BashOperator(
+        task_id="docker_deploy",
+        bash_command=f'cd "{PROJECT_DIR}/code/deployment" && docker compose down && docker compose up -d --build',
     )
 
-    stage_3_deploy = BashOperator(
-        task_id="deployment",
-        bash_command=f"cd {PROJECT_DIR}/code/deployment && docker compose down && docker compose up -d --build",
-    )
-
-    stage_1_data >> stage_2_model >> stage_3_deploy
+    run_dvc_pipeline >> deploy_services
