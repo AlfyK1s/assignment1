@@ -1,0 +1,17 @@
+stages:
+  prepare:
+    cmd: python code/datasets/process_data.py
+    deps:
+      - code/datasets/process_data.py
+      - data/raw/winequality-red.csv
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+  train:
+    cmd: python code/models/train.py
+    deps:
+      - code/models/train.py
+      - data/processed/train.csv
+      - data/processed/test.csv
+    outs:
+      - models/model.pkl

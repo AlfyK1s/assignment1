@@ -5,7 +5,37 @@ env/
 # Кэш Python и байткод
 __pycache__/
 *.py[cod]
+*$py.class
 
 # Системные файлы и конфиги редактора
 .DS_Store
 .vscode/
+.idea/
+
+# Окружение и секреты
+.env
+
+# DVC (локальный кэш и временные файлы)
+.dvc/cache/
+.dvc/tmp/
+.dvc/config.local
+
+# Данные и артефакты моделей
+# (исходники и промежуточные данные отслеживаются через DVC, а не Git)
+data/raw/*
+!data/raw/*.dvc
+!data/raw/.gitignore
+data/processed/*
+!data/processed/*.dvc
+!data/processed/.gitignore
+models/*.pkl
+
+# MLflow (локальные запуски и артефакты)
+mlruns/
+mlartifacts/
+
+# Apache Airflow
+services/airflow/logs/
+*.pid
+airflow.db
+airflow.cfg
