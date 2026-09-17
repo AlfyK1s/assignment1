@@ -78,7 +78,7 @@ export AIRFLOW_HOME="$(pwd)/services/airflow"
 export PROJECT_DIR="$(pwd)"
 export AIRFLOW__CORE__LOAD_EXAMPLES=False
 
-source venv/bin/activate
+source .venv/bin/activate
 airflow standalone
 ```
 
@@ -89,10 +89,8 @@ airflow standalone
 Для запуска всей системы (планировщик, API-сервер и UI) достаточно поднять Airflow в standalone-режиме:
 
 ```bash
-# Переход в репозиторий и активация окружения
-cd assignment1
-source ../venv/bin/activate
 
+source .venv/bin/activate
 # Переменные окружения
 export AIRFLOW_HOME="$(pwd)/services/airflow"
 export PROJECT_DIR="$(pwd)"
